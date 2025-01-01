@@ -113,22 +113,3 @@ class Crawler:
             except Exception as e:
                 print(f"An error occurred: {e}")
                 break
-
-"""
-Example use of the continous crawler
-csf = Crawler().ContinousShopFinder("Senn24") # Recommend to use someone that has alot of raters
-for chunk in csf:                                                           
-    print(f"Found: {chunk['users']}")
-    print(f"Shops Total: {chunk['total_shops']}")
-    print(f"Shops Crawled: {chunk['total_shops_c']}")
-    print(f"Not yet crawled: {chunk['not_crawled']}")
-    print(f"Progress: {chunk['total_shops_c'] / chunk['total_shops']* 100:.2f}%")
-    print("\n\n")
-
-Parameters explained:
-exclude_owi = Exclude any offer/s without image
--> if turned on will only append offers to the list that have a thumbnail
-
-name
--> name of the shop / seller
-"""
