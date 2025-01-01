@@ -109,7 +109,7 @@ class Crawler:
                          "total_shops_c": len(shops_crawled),
                          "not_crawled": len(not_yet_crawled)
                          }    
-                yield chunk  # Yield the chunk dictionary instead of raters
+                yield chunk 
             except Exception as e:
                 print(f"An error occurred: {e}")
                 break
