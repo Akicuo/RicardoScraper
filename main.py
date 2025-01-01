@@ -2,6 +2,11 @@ import requests
 from bs4 import BeautifulSoup
 import random
 url = "https://www.ricardo.ch/"
+
+def remove_duplicates(word_list):
+    unique_words = list(set(word_list))
+    return unique_words
+
 def AmountOfOfferPages(name: str) -> list:
     global url
     pages = []
@@ -37,19 +42,22 @@ def ShopOffers(name:str, page:int=1, exclude_owi:bool=False, links_only:bool=Fal
             if exclude_owi and img is None:
                 continue
             separated_texts = "|".join(text_elements).split("|")
-            if len(separated_texts) == 3:
-                v_results.append({  "shop": name,
-                                    "image": img,
-                                    "title": separated_texts[0],
-                                    "price": float(separated_texts[1]),
-                                    "link": "https://www.ricardo.ch"+result.get('href')})
-            elif len(separated_texts) == 4:
-                v_results.append({  "shop": name,
-                                    "image": img,
-                                    "title": separated_texts[0],
-                                    "extra": separated_texts[1],
-                                    "price": float(str(separated_texts[2]).replace("'", "")),
-                                    "link": "https://www.ricardo.ch"+result.get('href')})
+            try:
+                    if len(separated_texts) == 3:
+                        v_results.append({  "shop": name,
+                                            "image": img,
+                                            "title": separated_texts[0],
+                                            "price": float(str(separated_texts[2]).replace("'", "")),
+                                            "link": "https://www.ricardo.ch"+result.get('href')})
+                    elif len(separated_texts) == 4:
+                        v_results.append({  "shop": name,
+                                            "image": img,
+                                            "title": separated_texts[0],
+                                            "extra": separated_texts[1],
+                                            "price": float(str(separated_texts[2]).replace("'", "")),
+                                            "link": "https://www.ricardo.ch"+result.get('href')})
+            except:
+                continue
 
     return v_results
 
@@ -62,9 +70,9 @@ def ShopRatings(name:str, names_only=False):
     v_results=None
     if names_only:
         v_results = []
-        print("searching for names only")
         for result in results:
             v_results.append("|".join(result.stripped_strings).split("|")[0])
+            v_results = remove_duplicates(v_results)
         
     else:
         v_results = {"polarity": {}, "ratings": []}
@@ -104,7 +112,8 @@ class Crawler:
                 if not_yet_crawled:
                     current_shop = random.choice(list(not_yet_crawled))
 
-                chunk = {"users": len(raters),
+                chunk = {"sf": shops_found,
+                         "users": raters,
                          "total_shops": len(shops_found),
                          "total_shops_c": len(shops_crawled),
                          "not_crawled": len(not_yet_crawled)
