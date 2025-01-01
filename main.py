@@ -2,15 +2,15 @@ import requests
 from bs4 import BeautifulSoup
 import random
 url = "https://www.ricardo.ch/"
-def AmountOfOfferPages(name: str) -> int:
+def AmountOfOfferPages(name: str) -> list:
     global url
-    pages = 0
+    pages = []
     page = 1
     while True:
         response = requests.get(url=url+f"de/shop/{name}/offers/?page={page}")
         if response.status_code != 200:
             break
-        pages += 1
+        pages.append(page)
         page += 1
     return pages
 
