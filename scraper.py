@@ -112,8 +112,7 @@ class Crawler:
                 if not_yet_crawled:
                     current_shop = random.choice(list(not_yet_crawled))
 
-                chunk = {"sf": shops_found,
-                         "users": raters,
+                chunk = {"users": raters,
                          "total_shops": len(shops_found),
                          "total_shops_c": len(shops_crawled),
                          "not_crawled": len(not_yet_crawled)
