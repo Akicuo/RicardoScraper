@@ -54,3 +54,7 @@ for chunk in csf:
 - **page**: Page number to retrieve offers from.
 - **links_only**: Return only the links of the offers.
 - **names_only**: Return only the names of the raters.
+
+## File Examples
+- **users.json**: Contain an example list of users
+- **offers.json**: Contain an example list of offers
