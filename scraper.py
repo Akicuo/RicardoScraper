@@ -79,7 +79,7 @@ def product(url: str):
             "title": title,
             "uncut_url": url,
             "cut_url": url,
-            "pricing": pricing,
+            "pricing": pricing[0],
             "description":description,
             "instant_buy": instant_buy,
             "pickup": {
