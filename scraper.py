@@ -54,11 +54,12 @@ def product(url: str):
         price2 = soup.find("p", class_="MuiBox-root mui-xf2v4p")
         if bid_button:
             type = "auction"
-            pricing.append({"starting_price": price2.text})
+            
             if price1:
-                pricing.append({"buy_now_price": price1.text})
+                pricing.append({"starting_price": float(price2.text), "buy_now_price": float(price1.text)})
                 instant_buy = True
             else:
+                pricing.append({"starting_price": float(price2.text)})
                 instant_buy = False
         else:
             type = "sale"
