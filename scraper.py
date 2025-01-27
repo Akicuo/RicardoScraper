@@ -1,6 +1,6 @@
-import requests 
 from bs4 import BeautifulSoup
 import random
+import requests
 url = "https://www.ricardo.ch/"
 
 def remove_duplicates(word_list):
