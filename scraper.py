@@ -1,11 +1,91 @@
 from bs4 import BeautifulSoup
 import random
 import requests
+import re,json
+from playwright.sync_api import sync_playwright
 url = "https://www.ricardo.ch/"
-
 def remove_duplicates(word_list):
     unique_words = list(set(word_list))
     return unique_words
+
+
+def product(url: str):
+    with sync_playwright() as p:
+        # Launch browser in headless mode
+        browser = p.chromium.launch(headless=True, channel="chrome")
+        context = browser.new_context(
+            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36 OPR/115.0.0.0"
+        )
+        fo = None
+        co = None
+        all_images = []
+        finished = False
+        page = context.new_page()
+        page.goto(url)
+        page.wait_for_selector('img')
+        page.wait_for_load_state("load")
+        soup = BeautifulSoup(page.content(), 'html.parser')
+        while finished == False:
+            img_src = page.locator('img').first.get_attribute('src')
+            print(f"f img {img_src}")
+            page.wait_for_timeout(100)
+            try:  
+                page.click('button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeLarge.mui-1iqj9qi', timeout=100)
+            except:
+                break
+            print("click on button")
+            page.wait_for_timeout(100)
+            co = img_src
+            all_images.append(img_src)
+
+            if fo == None:
+                print("First Iteration: changing variable fo to img source")
+                fo = img_src
+            else:
+                
+                if co == fo:
+                    print("After First Iteration: Breaking the loop")
+                    finished = True
+                    break
+
+        type = None
+        pricing = []
+        bid_button = soup.find("button", {"id": "btnPlaceBidCTA"}) # page.query_selector("#btnPlaceBidCTA")
+        price1 = soup.find("div", class_="MuiBox-root mui-xf2v4p")
+        price2 = soup.find("p", class_="MuiBox-root mui-xf2v4p")
+        if bid_button:
+            type = "auction"
+            pricing.append({"starting_price": price2.text})
+            pricing.append({"buy_now_price": price1.text})
+        else:
+            type = "sale"
+            pricing.append({"buy_now_price": price2.text})
+        title = soup.find("h1", class_="MuiBox-root mui-1mg8wvf").text
+        description = soup.find("div", class_="MuiBox-root mui-wvzkyj").text# page.query_selector("div.MuiBox-root.mui-wvzkyj").text_content
+
+        
+        browser.close()
+        
+        # Print or return the list of background image URLs
+        
+        return {
+            "type": type,
+            "images": all_images,
+            "title": title,
+            "uncut_url": url,
+            "cut_url": url,
+            "pricing": pricing,
+            "description":description
+
+        }
+
+
+e = product("https://www.ricardo.ch/de/a/apple-imac-21-5-zoll-retina-4k-2017-1279339064/")
+print(e)
+with open("result.json", "w") as vb:
+    json.dump(e, vb, indent=4)
+
+
 
 def AmountOfOfferPages(name: str) -> list:
     global url
