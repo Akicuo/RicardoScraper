@@ -64,7 +64,10 @@ def product(url: str):
             type = "sale"
             pricing.append({"buy_now_price": price2.text})
         title = soup.find("h1", class_="MuiBox-root mui-1mg8wvf").text
-        description = soup.find("div", class_="MuiBox-root mui-wvzkyj").text# page.query_selector("div.MuiBox-root.mui-wvzkyj").text_content
+        descriptions = soup.find("div", class_="MuiBox-root mui-wvzkyj").find("article").find_all("p")
+        description= []
+        for desc in descriptions:
+            description.append(desc.text)
 
         abholung = soup.find("button", class_="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone MuiLink-button mui-1ogmf2r").text.split(" ")
 
