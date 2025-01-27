@@ -25,13 +25,9 @@ def product(url: str):
         page.wait_for_selector('img')
         page.wait_for_load_state("load")
         soup = BeautifulSoup(page.content(), 'html.parser')
+
         while finished == False:
             img_src = page.locator('img').first.get_attribute('src')
-            page.wait_for_timeout(100)
-            try:  
-                page.click('button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeLarge.mui-1iqj9qi', timeout=100)
-            except:
-                break
             page.wait_for_timeout(100)
             co = img_src
             all_images.append(img_src)
@@ -43,23 +39,35 @@ def product(url: str):
                 if co == fo:
                     finished = True
                     break
+            page.wait_for_timeout(100)
+            try:  
+                page.click('button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeLarge.mui-1iqj9qi', timeout=100)
+            except:
+                break
+           
 
         type = None
         pricing = []
+        instant_buy = False
         bid_button = soup.find("button", {"id": "btnPlaceBidCTA"}) # page.query_selector("#btnPlaceBidCTA")
         price1 = soup.find("div", class_="MuiBox-root mui-xf2v4p")
         price2 = soup.find("p", class_="MuiBox-root mui-xf2v4p")
         if bid_button:
             type = "auction"
             pricing.append({"starting_price": price2.text})
-            pricing.append({"buy_now_price": price1.text})
+            if price1:
+                pricing.append({"buy_now_price": price1.text})
+                instant_buy = True
+            else:
+                instant_buy = False
         else:
             type = "sale"
             pricing.append({"buy_now_price": price2.text})
         title = soup.find("h1", class_="MuiBox-root mui-1mg8wvf").text
         description = soup.find("div", class_="MuiBox-root mui-wvzkyj").text# page.query_selector("div.MuiBox-root.mui-wvzkyj").text_content
 
-        
+        abholung = soup.find("button", class_="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone MuiLink-button mui-1ogmf2r").text.split(" ")
+
         browser.close()
         
         return {
@@ -69,12 +77,17 @@ def product(url: str):
             "uncut_url": url,
             "cut_url": url,
             "pricing": pricing,
-            "description":description
+            "description":description,
+            "instant_buy": instant_buy,
+            "pickup": {
+                "location": abholung[1],
+                "plz": abholung[0]
+            }
 
         }
 
 
-e = product("https://www.ricardo.ch/de/a/apple-imac-21-5-zoll-retina-4k-2017-1279339064/")
+e = product("https://www.ricardo.ch/de/a/imac-(retina-5k-27-zoll-ende-2015)-1278553784/")
 print(e)
 with open("result.json", "w") as vb:
     json.dump(e, vb, indent=4)

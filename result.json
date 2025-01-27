@@ -1,20 +1,22 @@
 {
     "type": "auction",
     "images": [
-        "https://img.ricardostatic.ch/images/7e518392-1389-4ee9-a70b-75f1ed50a099/t_1000x750/apple-imac-215-zoll-retina-4k-2017",
-        "https://img.ricardostatic.ch/images/a46541a0-ff7d-4010-929c-0f6fc4ef9ba7/t_1800x1350/apple-imac-215-zoll-retina-4k-2017",
-        "https://img.ricardostatic.ch/images/e45cf14c-045d-4155-8193-3233a1070f72/t_1800x1350/apple-imac-215-zoll-retina-4k-2017"
+        "https://img.ricardostatic.ch/images/622053b0-e7f2-41e7-8f1a-0ea83ed220e6/t_1000x750/imac-retina-5k-27-zoll-ende-2015",
+        "https://img.ricardostatic.ch/images/a66ed994-b4fd-4495-af87-fc1de736f03c/t_1800x1350/imac-retina-5k-27-zoll-ende-2015",
+        "https://img.ricardostatic.ch/images/fa9507cc-6da1-4666-b258-c845eff70370/t_1800x1350/imac-retina-5k-27-zoll-ende-2015"
     ],
-    "title": "Apple iMac 21,5 Zoll Retina 4K 2017",
-    "uncut_url": "https://www.ricardo.ch/de/a/apple-imac-21-5-zoll-retina-4k-2017-1279339064/",
-    "cut_url": "https://www.ricardo.ch/de/a/apple-imac-21-5-zoll-retina-4k-2017-1279339064/",
+    "title": "iMac (Retina 5K, 27 Zoll, Ende 2015)",
+    "uncut_url": "https://www.ricardo.ch/de/a/imac-(retina-5k-27-zoll-ende-2015)-1278553784/",
+    "cut_url": "https://www.ricardo.ch/de/a/imac-(retina-5k-27-zoll-ende-2015)-1278553784/",
     "pricing": [
         {
-            "starting_price": "300.00"
-        },
-        {
-            "buy_now_price": "500.00"
+            "starting_price": "350.00"
         }
     ],
-    "description": "Verkaufe gebrauchten Apple iMac All-in-one PC mit 1 TB Speicherkapazit\u00e4t. Der iMac ist in einem guten Zustand und voll funktionsf\u00e4hig. Leichte Gebrauchsspuren sind vorhanden. Originalkarton und Zubeh\u00f6r sind inklusive. Ideal f\u00fcr B\u00fcroarbeiten, Multimedia oder als Familiencomputer."
+    "description": "Sehr gepflegter iMac (Retina 5K, 27 Zoll, Ende 2015) in Original Verpackung inkl. allem Zubeh\u00f6r und Kabel (Maus Kabel nicht Original).- Nichtraucherhaushalt- Abholung, Versand nach Absprache (keine Haftung f\u00fcr Versand)- Zus\u00e4tzliche RAM verbautDisplay27\" Retina 5K Display (68,58 cm Diagonale) mit IPS Technologie Aufl\u00f6sung von 5120 x 2880 Pixeln mit Unterst\u00fctzung f\u00fcr Millionen von FarbenProzessor3,2 GHz Quad-Core Intel Core i5 (Turbo Boost bis zu 3,6 GHz)ArbeitsspeicherArbeitsspeicher32 GB (4x 8 GB) DDR3 Arbeitsspeicher mit 1600 MHzKapazit\u00e4t13,2 GHz 1 TB Festplatte (7200 U/Min.)Grafik3,2 GHz AMD Radeon R9 M390 Grafikprozessor mit 2 GB GDDR5 GrafikspeicherVideo und KameraFaceTime HD Kamera Gleichzeitige Unterst\u00fctzung der vollen nativen Aufl\u00f6sung auf dem integrierten Display und auf bis zu zwei externen Bildschirmen mit bis zu 4096 x 2160 Pixeln oder einem externen Dualkabel-Bildschirm mit 5120 x 2880 Pixeln Unterst\u00fctzung f\u00fcr die Modi ?Erweiterter Schreibtisch? und ?Bildschirme synchronisieren?AudioStereolautsprecher Zwei Mikrofone 3,5 mm Kopfh\u00f6reranschluss Kopfh\u00f6reranschluss/optisch-digitaler Audioausgang (Minianschluss) Unterst\u00fctzung f\u00fcr Apple iPhone Headset mit MikrofonAnschl\u00fcsse und ErweiterungNo alt supplied for Image 3,5 mm Kopfh\u00f6reranschluss SDXC Kartensteckplatz Vier USB 3 Anschl\u00fcsse (kompatibel mit USB 2) Zwei Thunderbolt 2 Anschl\u00fcsse Mini DisplayPort Ausgang Unterst\u00fctzung f\u00fcr HDMI, DVI, VGA und Dual-Link DVI (Adapter separat erh\u00e4ltlich) 10/100/1000BASE?T Gigabit Ethernet (RJ-45 Anschluss) Kensington DiebstahlsicherungWeitere Info auf Apple.",
+    "instant_buy": false,
+    "pickup": {
+        "location": "Bichelsee",
+        "plz": "8363"
+    }
 }
