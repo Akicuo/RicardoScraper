@@ -27,24 +27,20 @@ def product(url: str):
         soup = BeautifulSoup(page.content(), 'html.parser')
         while finished == False:
             img_src = page.locator('img').first.get_attribute('src')
-            print(f"f img {img_src}")
             page.wait_for_timeout(100)
             try:  
                 page.click('button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeLarge.mui-1iqj9qi', timeout=100)
             except:
                 break
-            print("click on button")
             page.wait_for_timeout(100)
             co = img_src
             all_images.append(img_src)
 
             if fo == None:
-                print("First Iteration: changing variable fo to img source")
                 fo = img_src
             else:
                 
                 if co == fo:
-                    print("After First Iteration: Breaking the loop")
                     finished = True
                     break
 
@@ -65,8 +61,6 @@ def product(url: str):
 
         
         browser.close()
-        
-        # Print or return the list of background image URLs
         
         return {
             "type": type,
