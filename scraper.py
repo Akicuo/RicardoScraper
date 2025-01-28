@@ -56,14 +56,14 @@ def product(url: str):
             type = "auction"
             
             if price1:
-                pricing.append({"starting_price": float(price2.text), "buy_now_price": float(price1.text)})
+                pricing.append({"starting_price": float(price2.text.replace("'", "")), "buy_now_price": float(price1.text.replace("'", ""))})
                 instant_buy = True
             else:
-                pricing.append({"starting_price": float(price2.text)})
+                pricing.append({"starting_price": float(price2.text.replace("'", ""))})
                 instant_buy = False
         else:
             type = "sale"
-            pricing.append({"buy_now_price": price2.text})
+            pricing.append({"buy_now_price": float(price2.text.replace("'", ""))})
         title = soup.find("h1", class_="MuiBox-root mui-1mg8wvf").text
         descriptions = soup.find("div", class_="MuiBox-root mui-wvzkyj").find("article").find_all("p")
         description= []
