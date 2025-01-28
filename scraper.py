@@ -24,37 +24,35 @@ def product(url: str):
         page.goto(url)
         page.wait_for_selector('img')
         page.wait_for_load_state("load")
-        soup = BeautifulSoup(page.content(), 'html.parser')
+        soup = BeautifulSoup(page.content(), 'html.parser', from_encoding='utf-8')  # Ensure BeautifulSoup uses UTF-8
 
-        while finished == False:
+        while not finished:
             img_src = page.locator('img').first.get_attribute('src')
             page.wait_for_timeout(100)
             co = img_src
             all_images.append(img_src)
 
-            if fo == None:
+            if fo is None:
                 fo = img_src
             else:
-                
                 if co == fo:
                     finished = True
                     break
             page.wait_for_timeout(100)
-            try:  
+            try:
                 page.click('button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeLarge.mui-1iqj9qi', timeout=100)
             except:
                 break
-           
 
         type = None
         pricing = []
         instant_buy = False
-        bid_button = soup.find("button", {"id": "btnPlaceBidCTA"}) # page.query_selector("#btnPlaceBidCTA")
+        bid_button = soup.find("button", {"id": "btnPlaceBidCTA"})
         price1 = soup.find("div", class_="MuiBox-root mui-xf2v4p")
         price2 = soup.find("p", class_="MuiBox-root mui-xf2v4p")
+
         if bid_button:
             type = "auction"
-            
             if price1:
                 pricing.append({"starting_price": float(price2.text.replace("'", "")), "buy_now_price": float(price1.text.replace("'", ""))})
                 instant_buy = True
@@ -64,16 +62,15 @@ def product(url: str):
         else:
             type = "sale"
             pricing.append({"buy_now_price": float(price2.text.replace("'", ""))})
+        
         title = soup.find("h1", class_="MuiBox-root mui-1mg8wvf").text
         descriptions = soup.find("div", class_="MuiBox-root mui-wvzkyj").find("article").find_all("p")
-        description= []
-        for desc in descriptions:
-            description.append(desc.text)
+        description = [desc.text for desc in descriptions]
 
-        abholung = soup.find("button", class_="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone MuiLink-button mui-1ogmf2r").text.split(" ")
-
-        browser.close()
+        product_aop = soup.find("div", class_="MuiBox-root mui-5k7eiq").get_text()
         
+        browser.close()
+
         return {
             "type": type,
             "images": all_images,
@@ -81,13 +78,11 @@ def product(url: str):
             "uncut_url": url,
             "cut_url": url,
             "pricing": pricing[0],
-            "description":description,
+            "description": description,
             "instant_buy": instant_buy,
-            "pickup": {
-                "location": abholung[1],
-                "plz": abholung[0]
+            "product_aop": {
+                "text": product_aop,
             }
-
         }
 
 
